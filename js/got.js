@@ -14,8 +14,12 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   var userDatas = JSON.parse(xhttp.responseText);
   // Innen hívhatod meg a többi függvényed
   var charactersAlive = findAliveCharacters(userDatas);
+  var button = document.querySelector('#btn');
   sortAliveCharacters(charactersAlive);
   showCharacterList(charactersAlive);
+  button.addEventListener('click', function search() {
+    searchCharacter(charactersAlive);
+  });
 }
 
 getGameOfThronesCharacterDatas(
@@ -51,8 +55,39 @@ function showCharacterList(charactersAlive) {
   sortAliveCharacters(charactersAlive);
   for (var i = 0; i < charactersAlive.length; i++) {
     characterRows += `
-      <div class="portraits__div"><img src="${charactersAlive[i].portrait}" alt="${charactersAlive[i].name}"<br><br>${charactersAlive[i].name}<br></div>
+      <div class="portraits__div"><img src="${charactersAlive[i].portrait}" alt="${charactersAlive[i].name}"><br><br>${charactersAlive[i].name}<br></div>
       `;
   }
   characterTable.innerHTML = characterRows;
+}
+
+function findFlagOfHouse(charactersAlive) {
+  var flagOfHouse = '';
+  for (var i = 0; i < charactersAlive.length; i++) {
+    if (charactersAlive[i].house > 0) {
+      flagOfHouse = `<img src="./assets/houses/${charactersAlive[i].house}.png" alt="the flag of ${charactersAlive[i].house} house>`;
+    }
+  }
+  return flagOfHouse;
+}
+
+function searchCharacter(charactersAlive) {
+  var userSearch = document.querySelector('#search-field').value.toLowerCase();
+  var resultOfSearch = document.querySelector('#result');
+  var result = `
+  <h2>Character not found</h2>`;
+  for (var i = 0; i < charactersAlive.length; i++) {
+    if (charactersAlive[i].name.toLowerCase().indexOf(userSearch) > -1) {
+      result = `
+        <div class="picture"><img src="${charactersAlive[i].picture}" alt="${charactersAlive[i].name}></div>
+        <br>
+        <div class="name-and-flag>
+          <h2>${charactersAlive[i].name}</h2>
+          <div class="flag">${findFlagOfHouse(charactersAlive)}</div>
+        </div>
+        <p>${charactersAlive[i].bio}</p>`;
+    }
+    resultOfSearch.innerHTML = result;
+  }
+  return result;
 }
