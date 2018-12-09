@@ -61,11 +61,11 @@ function showCharacterList(charactersAlive) {
   characterTable.innerHTML = characterRows;
 }
 
-function findFlagOfHouse(charactersAlive) {
+function findFlagOfHouse(searchedCharacter) {
   var flagOfHouse = '';
-  for (var i = 0; i < charactersAlive.length; i++) {
-    if (charactersAlive[i].house > 0) {
-      flagOfHouse = `<img src="./assets/houses/${charactersAlive[i].house}.png" alt="the flag of ${charactersAlive[i].house} house>`;
+  for (var i = 0; i < Object.keys(searchedCharacter).length; i++) {
+    if (searchedCharacter.house) {
+      flagOfHouse = `<img src="./assets/houses/${searchedCharacter.house}.png" alt="the flag of ${searchedCharacter.house} house">`;
     }
   }
   return flagOfHouse;
@@ -74,16 +74,18 @@ function findFlagOfHouse(charactersAlive) {
 function searchCharacter(charactersAlive) {
   var userSearch = document.querySelector('#search-field').value.toLowerCase();
   var resultOfSearch = document.querySelector('#result');
+  var searchedCharacter = {};
   var result = `
   <h2>Character not found</h2>`;
   for (var i = 0; i < charactersAlive.length; i++) {
     if (charactersAlive[i].name.toLowerCase().indexOf(userSearch) > -1) {
+      searchedCharacter = charactersAlive[i];
       result = `
         <div class="picture"><img src="${charactersAlive[i].picture}" alt="${charactersAlive[i].name}></div>
         <br>
         <div class="name-and-flag>
           <h2>${charactersAlive[i].name}</h2>
-          <div class="flag">${findFlagOfHouse(charactersAlive)}</div>
+          <div class="flag">${findFlagOfHouse(searchedCharacter)}</div>
         </div>
         <p>${charactersAlive[i].bio}</p>`;
     }

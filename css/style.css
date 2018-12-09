@@ -23,6 +23,10 @@
   font-size: 1.3vw;
 }
 
+.flag {
+  right: 10%;
+}
+
 h1 {
   color: #969696;
   font-family: "Game of Thrones", serif;
