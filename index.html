@@ -5,12 +5,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Game of Thrones</title>
+  <link href="./css/style.css" rel="stylesheet" type="text/css">
+  <link href="./fonts/GameofThrones.ttf" rel="stylesheet">
+  <link href="./fonts/OpenSansCondensed-Light.ttf" rel="stylesheet">
 </head>
 
-<body>
-
-    <script src="./js/got.js"></script>
+<body class="container">
+  <main class="left-block">
+    <div class="portraits" id="portraits"></div>
+  </main>
+  <article class="right-block">
+    <div class="result-block">
+      <h1>Game of Thrones</h1>
+      <pre class="result"></pre>
+    </div>
+    <div class="search-block">
+      <button class="btn" id="btn">&#62</button>
+      <input type="text" class="search-field" id="search-field" placeholder="Search a Character">
+    </div>
+  </article>
+  <script src="./js/got.js"></script>
 </body>
 
 </html>
