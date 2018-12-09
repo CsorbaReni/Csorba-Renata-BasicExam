@@ -20,6 +20,7 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   button.addEventListener('click', function search() {
     searchCharacter(charactersAlive);
   });
+  getCharacterContainers(charactersAlive);
 }
 
 getGameOfThronesCharacterDatas(
@@ -92,4 +93,34 @@ function searchCharacter(charactersAlive) {
     resultOfSearch.innerHTML = result;
   }
   return result;
+}
+
+function showCharacterDescription(charactersAlive, index) {
+  var container = document.querySelector('.portraits');
+  var characterContainer = container.children;
+  var resultOfSearch = document.querySelector('#result');
+  var result = `
+  <div class="picture"><img src="${charactersAlive[index].picture}" alt="${charactersAlive[index].name}></div>
+  <br>
+  <div class="name-and-flag>
+    <h2>${charactersAlive[index].name}</h2>
+    <div class="flag">${findFlagOfHouse(charactersAlive)}</div>
+  </div>
+  <p>${charactersAlive[index].bio}</p>`;
+  resultOfSearch.innerHTML = result;
+}
+
+function addCustomListener(element, charactersAlive, index) {
+  element.addEventListener('click', function show() {
+    showCharacterDescription(charactersAlive, index);
+  });
+}
+
+function getCharacterContainers(charactersAlive) {
+  var container = document.querySelector('.portraits');
+  var characterContainer = container.children;
+  for (var i = 0; i < characterContainer.length; i++) {
+    var item = characterContainer[i].children[2];
+    addCustomListener(item, charactersAlive, i);
+  }
 }
