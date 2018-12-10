@@ -96,8 +96,6 @@ function searchCharacter(charactersAlive) {
 }
 
 function showCharacterDescription(charactersAlive, index) {
-  var container = document.querySelector('.portraits');
-  var characterContainer = container.children;
   var resultOfSearch = document.querySelector('#result');
   var result = `
   <div class="picture"><img src="${charactersAlive[index].picture}" alt="${charactersAlive[index].name}></div>
@@ -117,10 +115,10 @@ function addCustomListener(element, charactersAlive, index) {
 }
 
 function getCharacterContainers(charactersAlive) {
-  var container = document.querySelector('.portraits');
-  var characterContainer = container.children;
+  var characterTable = document.querySelector('.portraits');
+  var characterContainer = characterTable.children;
   for (var i = 0; i < characterContainer.length; i++) {
-    var item = characterContainer[i].children[2];
+    var item = characterContainer[i].children[1];
     addCustomListener(item, charactersAlive, i);
   }
 }
